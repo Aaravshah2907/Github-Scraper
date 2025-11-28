@@ -1,0 +1,40 @@
+# GitHub-Scraper
+
+Lightweight command-line tool to collect public GitHub data (repo names, README) for analysis or backups.
+
+Features
+
+- Fetch repositories names & README.
+- Output to Markdown
+
+Prerequisites
+
+- Python 3.8+ (or adjust for your language/runtime)
+
+Installation
+
+1. Clone the repository:
+
+    ```bash
+    git clone git@github.com:Aaravshah2907/Github-Scraper.git
+    ```
+
+2. Create a virtual environment and install dependencies:
+    python -m venv .venv
+    source .venv/bin/activate   # On Windows: .venv\Scripts\activate
+    pip install -r requirements.txt
+
+Output File Formats
+
+- Markdown
+
+Contributing
+
+- Fork, create a branch, and open a pull request.
+- Include tests for new features or bug fixes.
+
+License
+MIT License — see LICENSE file for details.
+
+Contact
+Open an issue in this repository for bugs, feature requests, or questions.
