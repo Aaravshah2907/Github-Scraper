@@ -1,40 +1,82 @@
-# GitHub-Scraper
+# Github-Scraper
 
-Lightweight command-line tool to collect public GitHub data (repo names, README) for analysis or backups.
+A lightweight command-line tool to collect public GitHub repository data (names, URLs, and README content) for a specific user. It exports the data into a single Markdown file, making it perfect for creating context files for LLMs or archiving project summaries.
 
-Features
+## Features
 
-- Fetch repositories names & README.
-- Output to Markdown
+-   **Scrapes Public Repositories:** Fetches all public repositories for a given GitHub username.
+-   **Collects READMEs:** Downloads the `README.md` content for each repository.
+-   **Generates Markdown Report:** Creates a structured Markdown file containing:
+    -   User Profile URL
+    -   Table of Contents (Repository List) with links
+    -   Detailed section for each project with its URL and full README content.
+-   **Console Feedback:** Provides real-time progress and a clickable file URL for the generated report.
 
-Prerequisites
+## Prerequisites
 
-- Python 3.8+ (or adjust for your language/runtime)
+-   Python 3.8+
+-   `pip` (Python package installer)
 
-Installation
+## Installation
 
-1. Clone the repository:
+1.  **Clone the repository:**
 
     ```bash
-    git clone git@github.com:Aaravshah2907/Github-Scraper.git
+    git clone https://github.com/Aaravshah2907/Github-Scraper.git
+    cd Github-Scraper
     ```
 
-2. Create a virtual environment and install dependencies:
+2.  **Set up a virtual environment (Recommended):**
+
+    ```bash
     python -m venv .venv
-    source .venv/bin/activate   # On Windows: .venv\Scripts\activate
+    source .venv/bin/activate   # On macOS/Linux
+    # .venv\Scripts\activate    # On Windows
+    ```
+
+3.  **Install dependencies:**
+
+    ```bash
     pip install -r requirements.txt
+    ```
 
-Output File Formats
+## Usage
 
-- Markdown
+1.  **Configure the target username:**
+    Open `github_scraper.py` and set the `github_username` variable to the desired GitHub username (e.g., `Aaravshah2907`).
 
-Contributing
+    ```python
+    if __name__ == "__main__":
+        github_username = "Aaravshah2907" # Replace with target username
+        # ...
+    ```
 
-- Fork, create a branch, and open a pull request.
-- Include tests for new features or bug fixes.
+2.  **Run the scraper:**
 
-License
+    ```bash
+    python github_scraper.py
+    ```
+
+3.  **View the output:**
+    The script will generate a file named `<username>_github_projects_data.md` in the same directory. The console will print the absolute path to this file.
+
+## Future Improvements
+
+-   **CLI Arguments:** Allow passing the username as a command-line argument (e.g., `python github_scraper.py <username>`).
+-   **Async Scraping:** Use `aiohttp` for faster, concurrent fetching of repositories.
+-   **Rate Limit Handling:** Better handling of GitHub API rate limits using authenticated requests (Personal Access Tokens).
+-   **Filter Options:** Add options to filter by language, stars, or last updated date.
+-   **Multiple Formats:** Support exporting to JSON or CSV in addition to Markdown.
+
+## Contributing
+
+-   Fork, create a branch, and open a pull request.
+-   Include tests for new features or bug fixes.
+
+## License
+
 MIT License — see LICENSE file for details.
 
-Contact
+## Contact
+
 Open an issue in this repository for bugs, feature requests, or questions.

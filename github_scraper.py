@@ -18,7 +18,7 @@ def scrape_all_repos(username):
     all_repos = []
     page = 1
     
-    base_url = f"https://github.com/{username}?tab=repositories&page="
+    base_url = f"https://github.com/{username}?tab=repositories&sort=updated&page="
     
     print(f"Starting repository scraping for @{username}...")
 
@@ -90,6 +90,7 @@ def export_to_markdown(username, repositories):
     filename = f"{username}_github_projects_data.md"
     
     markdown_output = f"# GitHub Project Summary for @{username}\n\n"
+    markdown_output += f"**Profile URL:** https://github.com/{username}\n\n"
     markdown_output += f"Total Public Repositories Scraped: {len(repositories)}\n\n"
     markdown_output += "---\n\n"
     
@@ -97,12 +98,18 @@ def export_to_markdown(username, repositories):
         markdown_output += "No projects were found to summarize."
         return
 
+    # Add Repository List (TOC)
+    markdown_output += "## Repository List\n\n"
+    for repo in repositories:
+        markdown_output += f"- [{repo['name']}]({repo['url']})\n"
+    markdown_output += "\n---\n\n"
+
     print("\nStarting README fetching and Markdown export...")
     
     for i, repo in enumerate(repositories):
         readme_content = fetch_readme_content(repo['full_name'])
         
-        markdown_output += f"## {i+1}. Project: {repo['name']}\n"
+        markdown_output += f"## {i+1}. Project: [{repo['name']}]({repo['url']})\n"
         markdown_output += f"**URL:** {repo['url']}\n\n"
         
         markdown_output += "### README Content\n"
@@ -112,7 +119,9 @@ def export_to_markdown(username, repositories):
     with open(filename, 'w', encoding='utf-8') as f:
         f.write(markdown_output)
     
+    abs_path = os.path.abspath(filename)
     print(f"\nSuccessfully exported all project data to: {filename}")
+    print(f"File URL: file://{abs_path}")
     print("This file is now ready to be used as context for an LLM analysis.")
 
 
